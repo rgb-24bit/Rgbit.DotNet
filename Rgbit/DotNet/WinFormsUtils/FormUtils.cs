@@ -26,16 +26,9 @@ namespace Rgbit.DotNet.WinFormsUtils
         /// Practical mouse moves Form without borders.
         /// </summary>
         /// <param name="form">The form to be moved.</param>
-        public static void FormMourseMove(Form form) {
+        public static void FormMoveWithMouse(Form form) {
             ReleaseCapture();
             SendMessage(form.Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
-        }
-        
-        /// <summary>
-        /// Practical mouse moves Form without borders.
-        /// </summary>
-        public static void FormMouseMoveHandle(object sender, EventArgs e) {
-            FormMourseMove((Form) sender);
         }
     }
 }
