@@ -30,26 +30,14 @@ namespace Rgbit.DotNet.WinFormsUtils
         }
         
         /// <summary>
-        /// Use ControlPaint.LightLight to lighten the foreground of the control.
-        /// </summary>
-        public static void ControlForeColorLightHandle(object sender, EventArgs e) {
-            ControlForeColorLight((Control) sender);
-        }
-        
-        /// <summary>
-        /// Use ControlPaint.DarkDark to darken the foreground of the control.
-        /// </summary>
-        public static void ControlForeColorDarkHandle(object sender, EventArgs e) {
-            ControlForeColorDark((Control) sender);
-        }
-        
-        /// <summary>
         /// Make the foreground color of the control change automatically, like a button.
         /// </summary>
         /// <param name="ctrl">Control object.</param>
-        public static void ControlForceColorAutoChange(Control ctrl) {
-            ctrl.MouseEnter += new EventHandler(ControlForeColorDarkHandle);
-            ctrl.MouseLeave += new EventHandler(ControlForeColorLightHandle);
+        public static void ControlForceColorAutoChange(Control ctrl) { 
+            ctrl.MouseEnter += new EventHandler(
+                (sender, e) => ControlForeColorDark((Control) sender));
+            ctrl.MouseLeave += new EventHandler(
+                (sender, e) => ControlForeColorLight((Control) sender));
         }
         
         /// <summary>
@@ -69,26 +57,14 @@ namespace Rgbit.DotNet.WinFormsUtils
         }
         
         /// <summary>
-        /// Use ControlPaint.LightLight to lighten the background of the control.
-        /// </summary>
-        public static void ControlBackColorLightHandle(object sender, EventArgs e) {
-            ControlBackColorLight((Control) sender);
-        }
-        
-        /// <summary>
-        /// Use ControlPaint.DarkDark to darken the background of the control.
-        /// </summary>
-        public static void ControlBackColorDarkHandle(object sender, EventArgs e) {
-            ControlBackColorDark((Control) sender);
-        }
-        
-        /// <summary>
         /// Make the background color of the control change automatically, like a button.
         /// </summary>
         /// <param name="ctrl">Control object.</param>
         public static void ControlBackColorAutoChange(Control ctrl) {
-            ctrl.MouseEnter += new EventHandler(ControlBackColorDarkHandle);
-            ctrl.MouseLeave += new EventHandler(ControlBackColorLightHandle);
+            ctrl.MouseEnter += new EventHandler(
+               (sender, e) => ControlBackColorDark((Control) sender));
+            ctrl.MouseLeave += new EventHandler(
+               (sender, e) => ControlBackColorLight((Control) sender));
         }
     }
 }
