@@ -53,6 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DotNet\MediaUtils\MCIPlayer.cs" />
     <Compile Include="DotNet\WinFormsUtils\ControlUtils.cs" />
     <Compile Include="DotNet\WinFormsUtils\FormUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -60,6 +61,7 @@
   <ItemGroup>
     <Folder Include="DotNet" />
     <Folder Include="DotNet\WinFormsUtils" />
+    <Folder Include="DotNet\MediaUtils" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
