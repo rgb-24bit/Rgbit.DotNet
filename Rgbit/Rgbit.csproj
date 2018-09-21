@@ -53,7 +53,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DotNet\MediaUtils\MCIBasic.cs" />
     <Compile Include="DotNet\MediaUtils\MCIPlayer.cs" />
+    <Compile Include="DotNet\MediaUtils\MCIRecorder.cs" />
     <Compile Include="DotNet\WinFormsUtils\ControlUtils.cs" />
     <Compile Include="DotNet\WinFormsUtils\FormUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

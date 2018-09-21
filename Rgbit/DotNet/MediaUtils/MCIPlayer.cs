@@ -4,7 +4,6 @@
  */
 
 using System;
-using System.Runtime.InteropServices;
 using System.Text;
 
 namespace Rgbit.DotNet.MediaUtils
@@ -16,19 +15,11 @@ namespace Rgbit.DotNet.MediaUtils
     /// Ways to get song information: IsPlaying, GetCurentMilisecond, GetTotalLength.
     /// More methods: Execute, GetErrorMessage, SetPosition, SwicthTarget.
     /// 
-    /// Reference https://docs.microsoft.com/en-us/windows/desktop/multimedia/mci
     /// Reference https://www.codeproject.com/Articles/63094/Simple-MCI-Player
     /// </summary>
-    public class MCIPlayer
+    public class MCIPlayer : MCIBasic
     {
         private string target;
-        private int errorCode;
-        
-        [DllImport("winmm.dll")]
-        private static extern int mciSendString(string strCommand, StringBuilder strReturn,
-                                                int iReturnLength, IntPtr hwndCallback);
-        [DllImport("winmm.dll")]
-        public static extern int mciGetErrorString(int errCode, StringBuilder errMsg, int buflen);
         
         public MCIPlayer(string target) {
             this.target = target;
@@ -44,34 +35,7 @@ namespace Rgbit.DotNet.MediaUtils
             this.target = target;
             return this;
         }
-        
-        /// <summary>
-        /// Execute a Multimedia Command String.
-        /// </summary>
-        /// <param name="command">The Multimedia Command String to be executed.</param>
-        /// <param name="returnData">
-        /// Optional parameter to save the information returned after execution.
-        /// </param>
-        /// <returns>Return true for success, false for failure.</returns>
-        public bool Execute(string command, StringBuilder returnData=null) {
-            if (returnData == null) {
-                errorCode = mciSendString(command, null, 0, IntPtr.Zero);
-            } else {
-                errorCode = mciSendString(command, returnData, returnData.Capacity, IntPtr.Zero);
-            }
-            return errorCode == 0;
-        }
-        
-        /// <summary>
-        /// Get the error message of the last action, the error code will be reset.
-        /// </summary>
-        /// <returns>Error message string.</returns>
-        public string GetErrorMessage() {
-            StringBuilder errMsg = new StringBuilder(128);
-            errorCode = mciGetErrorString(errorCode, errMsg, 128);
-            return errMsg.ToString();
-        }
-        
+
         /// <summary>
         /// Open the target file and automatically call it when playing.
         /// </summary>
@@ -95,7 +59,7 @@ namespace Rgbit.DotNet.MediaUtils
         /// </summary>
         /// <returns>Return true for success, false for failure.</returns>
         private bool Close() {
-            string command = "play " + target;
+            string command = string.Format("close {0}", target);
             errorCode = mciSendString(command, null, 0, IntPtr.Zero);
             return errorCode == 0;
         }
