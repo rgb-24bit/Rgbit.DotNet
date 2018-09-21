@@ -36,8 +36,8 @@ namespace Rgbit.DotNet.MediaUtils
         /// </summary>
         /// <param name="target">Target file.</param>
         /// <returns>The instance itself.</returns>
-        public MCIPlayer swicthTarget(string target) {
-            close();
+        public MCIPlayer SwicthTarget(string target) {
+            this.Close();
             this.target = target;
             return this;
         }
@@ -50,7 +50,7 @@ namespace Rgbit.DotNet.MediaUtils
         /// Optional parameter to save the information returned after execution.
         /// </param>
         /// <returns>Return true for success, false for failure.</returns>
-        public bool execute(string command, StringBuilder returnData=null) {
+        public bool Execute(string command, StringBuilder returnData=null) {
             if (returnData == null) {
                 errorCode = mciSendString(command, null, 0, IntPtr.Zero);
             } else {
@@ -63,7 +63,7 @@ namespace Rgbit.DotNet.MediaUtils
         /// Get the error message of the last action, the error code will be reset.
         /// </summary>
         /// <returns>Error message string.</returns>
-        public string getErrorMessage() {
+        public string GetErrorMessage() {
             StringBuilder errMsg = new StringBuilder(128);
             errorCode = mciGetErrorString(errorCode, errMsg, 128);
             return errMsg.ToString();
@@ -73,8 +73,8 @@ namespace Rgbit.DotNet.MediaUtils
         /// Open the target file and automatically call it when playing.
         /// </summary>
         /// <returns>Return true for success, false for failure.</returns>
-        public bool open() {
-            this.close();  // Look a little longer
+        public bool Open() {
+            this.Close();  // Look a little longer
  
             string command = string.Format("open {0} type mpegvideo", target);
             errorCode = mciSendString(command, null, 0, IntPtr.Zero);
@@ -91,7 +91,7 @@ namespace Rgbit.DotNet.MediaUtils
         /// Turn off playback,
         /// </summary>
         /// <returns>Return true for success, false for failure.</returns>
-        public bool close() {
+        public bool Close() {
             string command = "play " + target;
             errorCode = mciSendString(command, null, 0, IntPtr.Zero);
             return errorCode == 0;
@@ -106,8 +106,8 @@ namespace Rgbit.DotNet.MediaUtils
         /// Refrence https://docs.microsoft.com/en-us/windows/desktop/multimedia/play
         /// </param>
         /// <returns>Return true for success, false for failure.</returns>
-        public bool play(params string[] options) {
-            if (open() == false) {  // Look a little longer
+        public bool Play(params string[] options) {
+            if (Open() == false) {  // Look a little longer
                 return false;
             }
             
@@ -119,7 +119,7 @@ namespace Rgbit.DotNet.MediaUtils
             errorCode = mciSendString(sb.ToString(), null, 0, IntPtr.Zero);
             
             if (errorCode != 0) {
-                close();
+                this.Close();
             }
             
             return errorCode == 0;
