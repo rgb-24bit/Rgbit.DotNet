@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
   <PropertyGroup>
-    <ProjectGuid>{F2DA2C7D-84DA-4F0D-B0D4-4909D9C7A85A}</ProjectGuid>
+    <ProjectGuid>{73F9E9E4-157F-4D5D-A25D-43EE1CA70F5A}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <OutputType>Library</OutputType>
-    <RootNamespace>Rgbit</RootNamespace>
-    <AssemblyName>Rgbit</AssemblyName>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>VisibleTest</RootNamespace>
+    <AssemblyName>VisibleTest</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <NoWin32Manifest>False</NoWin32Manifest>
@@ -45,6 +45,10 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -53,18 +57,33 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DotNet\MediaUtils\MCIBasic.cs" />
-    <Compile Include="DotNet\MediaUtils\MCIPlayer.cs" />
-    <Compile Include="DotNet\MediaUtils\MCIRecorder.cs" />
-    <Compile Include="DotNet\TimeFormat.cs" />
-    <Compile Include="DotNet\WinFormsUtils\ControlUtils.cs" />
-    <Compile Include="DotNet\WinFormsUtils\FormUtils.cs" />
+    <Compile Include="MainForm.cs" />
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MediaTestForm.cs" />
+    <Compile Include="MediaTestForm.Designer.cs">
+      <DependentUpon>MediaTestForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DotNet" />
-    <Folder Include="DotNet\WinFormsUtils" />
-    <Folder Include="DotNet\MediaUtils" />
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MediaTestForm.resx">
+      <DependentUpon>MediaTestForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Rgbit\Rgbit.csproj">
+      <Project>{F2DA2C7D-84DA-4F0D-B0D4-4909D9C7A85A}</Project>
+      <Name>Rgbit</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

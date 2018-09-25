@@ -12,7 +12,8 @@ namespace Rgbit.DotNet.MediaUtils
     /// Use MCI to playing multimedia devices and recording multimedia resource files.
     /// 
     /// Method related to playback behavior: Play, Stop, Pause, Resume.
-    /// Ways to get song information: IsPlaying, GetCurentMilisecond, GetTotalLength.
+    /// Ways to get song information: IsPlaying, GetPosition, GetTotalLength.
+    /// Ways to get and set song volume: GetVolume, SetVolume. 
     /// More methods: Execute, GetErrorMessage, SetPosition, SwicthTarget.
     /// 
     /// Reference https://www.codeproject.com/Articles/63094/Simple-MCI-Player
@@ -48,9 +49,8 @@ namespace Rgbit.DotNet.MediaUtils
             
             if (errorCode != 0) {
                 command = string.Format("open {0}", target);
-                errorCode = mciSendString(command, null, 0, IntPtr.Zero);
-            }
-            
+                errorCode = mciSendString(command, null, 0, IntPtr.Zero);           
+            }  
             return errorCode == 0;
         }
         
@@ -93,7 +93,7 @@ namespace Rgbit.DotNet.MediaUtils
         }
         
         /// <summary>
-        /// The stop command stops playback. 
+        /// The stop command stops playback.
         /// 
         /// Turn off music, please use this method instead of Close.
         /// </summary>
@@ -141,9 +141,19 @@ namespace Rgbit.DotNet.MediaUtils
         }
         
         /// <summary>
+        /// Get the length of the song.
+        /// </summary>
+        public int GetTotalLength() {
+            string command = string.Format("status {0} length", target);
+            StringBuilder returnData = new StringBuilder(128);
+            errorCode = mciSendString(command, returnData, 128, IntPtr.Zero);
+            return int.Parse(returnData.ToString());
+        }
+        
+        /// <summary>
         /// Get the position of the song in milliseconds.
         /// </summary>
-        public int GetCurentMilisecond() {
+        public int GetPosition() {
             string command = string.Format("status {0} position", target);
             StringBuilder returnData = new StringBuilder(128);
             errorCode = mciSendString(command, returnData, 128, IntPtr.Zero);
@@ -165,15 +175,29 @@ namespace Rgbit.DotNet.MediaUtils
             }
             return errorCode == 0;
         }
-        
+
         /// <summary>
-        /// Get the length of the song.
+        /// Get the average volume to the left and right speaker.
         /// </summary>
-        public int GetTotalLength() {
-            string command = string.Format("status {0} length", target);
+        public int GetVolume() {
+            string command = string.Format("status {0} volume", target);
             StringBuilder returnData = new StringBuilder(128);
             errorCode = mciSendString(command, returnData, 128, IntPtr.Zero);
             return int.Parse(returnData.ToString());
+        }
+        
+        /// <summary>
+        /// Set the average volume to the left and right speaker.
+        /// </summary>
+        /// <param name="volume">The volume, the range is [0, 1000].</param>
+        /// <returns>Return true for success, false for failure.</returns>
+        public bool SetVolume(int volume) {
+            if (volume >= 0 && volume <= 1000) {
+                string command = string.Format("setaudio {0} volume to {1}", target, volume);
+                errorCode = mciSendString(command, null, 0, IntPtr.Zero);
+                return errorCode == 0;
+            }
+            return false;
         }
     }
 }
