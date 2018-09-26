@@ -28,6 +28,8 @@ namespace VisibleTest
         {
             openFileDialog.ShowDialog();
             player = new MCIPlayer(openFileDialog.FileName);
+            
+            // progress bar
             posTrackBar.Minimum = 0;
             posTrackBar.Maximum = player.GetTotalLength();
         }
@@ -38,6 +40,8 @@ namespace VisibleTest
                 MessageBox.Show(player.GetErrorMessage());
             } else {
                 timer.Enabled = true;
+                
+                // volume bar
                 volumeTrackBar.Value = player.GetVolume();
             }
         }
@@ -48,7 +52,6 @@ namespace VisibleTest
                 MessageBox.Show(player.GetErrorMessage());
             } else {
                 timer.Enabled = false;
-                volumeTrackBar.Value = player.GetVolume();
             }
         }
         
@@ -75,6 +78,7 @@ namespace VisibleTest
             string current = TimeFormat.MilisecondToMMSS(player.GetPosition());
             string total = TimeFormat.MilisecondToMMSS(player.GetTotalLength());
             timeLabel.Text = string.Format("{0}/{1}", current, total);
+            
             posTrackBar.Value = player.GetPosition();
         }
         

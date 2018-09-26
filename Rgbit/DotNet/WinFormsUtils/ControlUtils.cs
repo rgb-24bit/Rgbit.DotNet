@@ -12,59 +12,47 @@ namespace Rgbit.DotNet.WinFormsUtils
     /// Utilities for Control.
     /// </summary>
     public class ControlUtils
-    {
+    {   
         /// <summary>
-        /// Use ControlPaint.LightLight to lighten the foreground of the control.
-        /// </summary>
-        /// <param name="ctrl">Control object.</param>
-        public static void ControlForeColorLight(Control ctrl) {
-            ctrl.ForeColor = ControlPaint.LightLight(ctrl.ForeColor);
-        }
-        
-        /// <summary>
-        /// Use ControlPaint.DarkDark to darken the foreground of the control.
-        /// </summary>
-        /// <param name="ctrl">Control object.</param>
-        public static void ControlForeColorDark(Control ctrl) {
-            ctrl.ForeColor = ControlPaint.DarkDark(ctrl.ForeColor);
-        }
-        
-        /// <summary>
-        /// Make the foreground color of the control change automatically, like a button.
+        /// Make the foreground color of the control change automatically.
+        /// 
+        /// Not working very well for bright colors.
         /// </summary>
         /// <param name="ctrl">Control object.</param>
         public static void ControlForceColorAutoChange(Control ctrl) { 
-            ctrl.MouseEnter += new EventHandler(
-                (sender, e) => ControlForeColorDark((Control) sender));
-            ctrl.MouseLeave += new EventHandler(
-                (sender, e) => ControlForeColorLight((Control) sender));
+            Action<object, EventArgs> ControlForeColorLight = (sender, e) => {
+                Control ctrls = (Control) sender;
+                ctrls.ForeColor = ControlPaint.LightLight(ctrls.ForeColor);
+            };
+            
+             Action<object, EventArgs> ControlForeColorDark = (sender, e) => {
+                Control ctrls = (Control) sender;
+                ctrls.ForeColor = ControlPaint.DarkDark(ctrls.ForeColor);
+            };
+            
+            ctrl.MouseEnter += new EventHandler(ControlForeColorDark);
+            ctrl.MouseLeave += new EventHandler(ControlForeColorLight);
         }
-        
+
         /// <summary>
-        /// Use ControlPaint.LightLight to lighten the background of the control.
-        /// </summary>
-        /// <param name="ctrl">Control object.</param>
-        public static void ControlBackColorLight(Control ctrl) {
-            ctrl.BackColor = ControlPaint.LightLight(ctrl.BackColor);
-        }
-        
-        /// <summary>
-        /// Use ControlPaint.DarkDark to darken the background of the control.
-        /// </summary>
-        /// <param name="ctrl">Control object.</param>
-        public static void ControlBackColorDark(Control ctrl) {
-            ctrl.BackColor = ControlPaint.DarkDark(ctrl.BackColor);
-        }
-        
-        /// <summary>
-        /// Make the background color of the control change automatically, like a button.
+        /// Make the background color of the control change automatically.
+        /// 
+        /// Not working very well for bright colors.
         /// </summary>
         /// <param name="ctrl">Control object.</param>
         public static void ControlBackColorAutoChange(Control ctrl) {
-            ctrl.MouseEnter += new EventHandler(
-               (sender, e) => ControlBackColorDark((Control) sender));
-            ctrl.MouseLeave += new EventHandler(
-               (sender, e) => ControlBackColorLight((Control) sender));
+            Action<object, EventArgs> ControlBackColorLight = (sender, e) => {
+                Control ctrls = (Control) sender;
+                ctrls.BackColor = ControlPaint.LightLight(ctrls.BackColor);
+            };
+            
+             Action<object, EventArgs> ControlBackColorDark = (sender, e) => {
+                Control ctrls = (Control) sender;
+                ctrls.BackColor = ControlPaint.DarkDark(ctrls.BackColor);
+            };
+            
+            ctrl.MouseEnter += new EventHandler(ControlBackColorDark);
+            ctrl.MouseLeave += new EventHandler(ControlBackColorLight);
         }
     }
 }

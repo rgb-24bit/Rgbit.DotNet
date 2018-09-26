@@ -34,6 +34,7 @@ namespace VisibleTest
         private void InitializeComponent()
         {
             this.mediaTestButton = new System.Windows.Forms.Button();
+            this.winformsTestButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // mediaTestButton
@@ -47,16 +48,29 @@ namespace VisibleTest
             this.mediaTestButton.UseVisualStyleBackColor = true;
             this.mediaTestButton.Click += new System.EventHandler(this.MediaTestButtonClick);
             // 
+            // winformsTestButton
+            // 
+            this.winformsTestButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.winformsTestButton.Location = new System.Drawing.Point(121, 12);
+            this.winformsTestButton.Name = "winformsTestButton";
+            this.winformsTestButton.Size = new System.Drawing.Size(103, 35);
+            this.winformsTestButton.TabIndex = 1;
+            this.winformsTestButton.Text = "WinForms Test";
+            this.winformsTestButton.UseVisualStyleBackColor = true;
+            this.winformsTestButton.Click += new System.EventHandler(this.WinformsTestButtonClick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(540, 353);
+            this.Controls.Add(this.winformsTestButton);
             this.Controls.Add(this.mediaTestButton);
             this.Name = "MainForm";
             this.Text = "VisibleTest";
             this.ResumeLayout(false);
         }
+        private System.Windows.Forms.Button winformsTestButton;
         private System.Windows.Forms.Button mediaTestButton;
     }
 }

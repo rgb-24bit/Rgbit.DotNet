@@ -24,5 +24,10 @@ namespace VisibleTest
         {
             (new MediaTestForm()).ShowDialog();
         }
+        
+        void WinformsTestButtonClick(object sender, EventArgs e)
+        {
+            (new WinFormsTestForm()).ShowDialog();
+        }
     }
 }
