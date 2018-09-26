@@ -35,6 +35,7 @@ namespace VisibleTest
         {
             this.mediaTestButton = new System.Windows.Forms.Button();
             this.winformsTestButton = new System.Windows.Forms.Button();
+            this.imageProcessTestButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // mediaTestButton
@@ -59,17 +60,30 @@ namespace VisibleTest
             this.winformsTestButton.UseVisualStyleBackColor = true;
             this.winformsTestButton.Click += new System.EventHandler(this.WinformsTestButtonClick);
             // 
+            // imageProcessTestButton
+            // 
+            this.imageProcessTestButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.imageProcessTestButton.Location = new System.Drawing.Point(230, 12);
+            this.imageProcessTestButton.Name = "imageProcessTestButton";
+            this.imageProcessTestButton.Size = new System.Drawing.Size(103, 35);
+            this.imageProcessTestButton.TabIndex = 2;
+            this.imageProcessTestButton.Text = "ImageProcess Test";
+            this.imageProcessTestButton.UseVisualStyleBackColor = true;
+            this.imageProcessTestButton.Click += new System.EventHandler(this.ImageProcessTestButtonClick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(540, 353);
+            this.Controls.Add(this.imageProcessTestButton);
             this.Controls.Add(this.winformsTestButton);
             this.Controls.Add(this.mediaTestButton);
             this.Name = "MainForm";
             this.Text = "VisibleTest";
             this.ResumeLayout(false);
         }
+        private System.Windows.Forms.Button imageProcessTestButton;
         private System.Windows.Forms.Button winformsTestButton;
         private System.Windows.Forms.Button mediaTestButton;
     }

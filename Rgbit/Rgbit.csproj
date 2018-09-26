@@ -53,6 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DotNet\DrawUtils\ImageProcess.cs" />
     <Compile Include="DotNet\MediaUtils\MCIBasic.cs" />
     <Compile Include="DotNet\MediaUtils\MCIPlayer.cs" />
     <Compile Include="DotNet\MediaUtils\MCIRecorder.cs" />
@@ -65,6 +66,7 @@
     <Folder Include="DotNet" />
     <Folder Include="DotNet\WinFormsUtils" />
     <Folder Include="DotNet\MediaUtils" />
+    <Folder Include="DotNet\DrawUtils" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

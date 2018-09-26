@@ -29,5 +29,10 @@ namespace VisibleTest
         {
             (new WinFormsTestForm()).ShowDialog();
         }
+        
+        void ImageProcessTestButtonClick(object sender, EventArgs e)
+        {
+            (new ImageProcessTestForm()).ShowDialog();
+        }
     }
 }
