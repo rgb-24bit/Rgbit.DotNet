@@ -5,10 +5,10 @@
 
 using System;
 
-namespace Rgbit.DotNet
+namespace Rgbit.DotNet.TimeUtils
 {
     /// <summary>
-    /// Description of TimeFormat.
+    /// Time and date formatting.
     /// </summary>
     public class TimeFormat
     {

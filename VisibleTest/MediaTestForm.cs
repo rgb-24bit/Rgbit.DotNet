@@ -7,8 +7,8 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-using Rgbit.DotNet;
 using Rgbit.DotNet.MediaUtils;
+using Rgbit.DotNet.TimeUtils;
 
 namespace VisibleTest
 {

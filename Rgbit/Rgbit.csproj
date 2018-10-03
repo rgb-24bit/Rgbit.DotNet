@@ -57,7 +57,7 @@
     <Compile Include="DotNet\MediaUtils\MCIBasic.cs" />
     <Compile Include="DotNet\MediaUtils\MCIPlayer.cs" />
     <Compile Include="DotNet\MediaUtils\MCIRecorder.cs" />
-    <Compile Include="DotNet\TimeFormat.cs" />
+    <Compile Include="DotNet\TimeUtils\TimeFormat.cs" />
     <Compile Include="DotNet\WinFormsUtils\ControlUtils.cs" />
     <Compile Include="DotNet\WinFormsUtils\FormUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -67,6 +67,7 @@
     <Folder Include="DotNet\WinFormsUtils" />
     <Folder Include="DotNet\MediaUtils" />
     <Folder Include="DotNet\DrawUtils" />
+    <Folder Include="DotNet\TimeUtils" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
