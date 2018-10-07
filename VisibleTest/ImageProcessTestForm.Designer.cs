@@ -43,6 +43,7 @@ namespace VisibleTest
             this.invertButton = new System.Windows.Forms.Button();
             this.clipRectButton = new System.Windows.Forms.Button();
             this.clipEllipseButton = new System.Windows.Forms.Button();
+            this.rotateButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.srcImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.resImage)).BeginInit();
             this.SuspendLayout();
@@ -148,11 +149,23 @@ namespace VisibleTest
             this.clipEllipseButton.UseVisualStyleBackColor = true;
             this.clipEllipseButton.Click += new System.EventHandler(this.ClipEllipseButtonClick);
             // 
+            // rotateButton
+            // 
+            this.rotateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rotateButton.Location = new System.Drawing.Point(292, 320);
+            this.rotateButton.Name = "rotateButton";
+            this.rotateButton.Size = new System.Drawing.Size(90, 38);
+            this.rotateButton.TabIndex = 10;
+            this.rotateButton.Text = "Rotate";
+            this.rotateButton.UseVisualStyleBackColor = true;
+            this.rotateButton.Click += new System.EventHandler(this.RotateButtonClick);
+            // 
             // ImageProcessTestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(673, 364);
+            this.Controls.Add(this.rotateButton);
             this.Controls.Add(this.clipEllipseButton);
             this.Controls.Add(this.clipRectButton);
             this.Controls.Add(this.invertButton);
@@ -168,6 +181,7 @@ namespace VisibleTest
             ((System.ComponentModel.ISupportInitialize)(this.resImage)).EndInit();
             this.ResumeLayout(false);
         }
+        private System.Windows.Forms.Button rotateButton;
         private System.Windows.Forms.Button clipEllipseButton;
         private System.Windows.Forms.Button clipRectButton;
         private System.Windows.Forms.Button invertButton;

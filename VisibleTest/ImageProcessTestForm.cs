@@ -54,7 +54,13 @@ namespace VisibleTest
         
         void ClipEllipseButtonClick(object sender, EventArgs e)
         {
-            resImage.Image = ImageProcess.ClipEllipse(srcImage.Image, 40, 40, 400, 400, SystemColors.Control);
+            resImage.Image = ImageProcess.ClipEllipse(srcImage.Image, 40, 40, 400, 400,
+                                                      SystemColors.Control);
+        }
+        
+        void RotateButtonClick(object sender, EventArgs e)
+        {
+            resImage.Image = ImageProcess.RotateFlip(srcImage.Image, 90, true, false);
         }
     }
 }

@@ -44,7 +44,6 @@ namespace Rgbit.DotNet.DrawUtils
             if (!CheckImageFormat(bitmap, ImageFormat.Bmp, ImageFormat.Jpeg, ImageFormat.Png)) {
                 throw new ArgumentException("Unsuported format, only support for bmp, jpg or png");
             }
-            image.GetThumbnailImage();image.RotateFlip
             // Locks the bitmap into system memory.
             Rectangle rect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
             BitmapData bmpdata = bitmap.LockBits(rect, ImageLockMode.ReadWrite, bitmap.PixelFormat);
@@ -199,6 +198,54 @@ namespace Rgbit.DotNet.DrawUtils
             bitmap.UnlockBits(bmpdata);
             
             return bitmap.Clone() as Image;
+        }
+        
+        /// <summary>
+        /// Scale the image proportionally.
+        /// </summary>
+        /// <returns>Scaled picture object.</returns>
+        public static Image Scale(Image image, float widthScale, float heightScale) {
+            Image.GetThumbnailImageAbort callback = () => { return false; };
+            
+            int newWidth = (int) (image.Width * widthScale);
+            int newHeight = (int) (image.Height * heightScale);
+
+            return image.GetThumbnailImage(newWidth, newHeight, callback, IntPtr.Zero);
+        }
+        
+        /// <summary>
+        /// Rotates, flips, or rotates and flips the Image.
+        /// </summary>
+        /// <param name="image">Image object.</param>
+        /// <param name="degree">The degree of rotation should be a multiple of 90.</param>
+        /// <param name="flipX">Whether to flip horizontally.</param>
+        /// <param name="flipY">Whether to flip vertically.</param>
+        /// <returns>Image object obtained after processing.</returns>
+        public static Image RotateFlip(Image image, int degree, bool flipX, bool flipY) {
+            Image newImage = image.Clone() as Image;
+            
+            if (degree % 90 != 0) {
+                throw new ArgumentException("The degree of rotation should be a multiple of 90");
+            }
+            
+            Dictionary<int, RotateFlipType> degreeMap = new Dictionary<int, RotateFlipType>() {
+                {0, RotateFlipType.RotateNoneFlipNone},
+                {90, RotateFlipType.Rotate90FlipNone},
+                {180, RotateFlipType.Rotate180FlipNone},
+                {270, RotateFlipType.Rotate270FlipNone}
+            };
+            
+            newImage.RotateFlip(degreeMap[degree % 360]);
+            
+            if (flipX == true) {
+                newImage.RotateFlip(RotateFlipType.RotateNoneFlipX);
+            }
+            
+            if (flipY == true) {
+                newImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+            }
+            
+            return newImage;
         }
         
         /// <summary>
