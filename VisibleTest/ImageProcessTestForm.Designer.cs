@@ -41,6 +41,8 @@ namespace VisibleTest
             this.swapArgbButton = new System.Windows.Forms.Button();
             this.grayButton = new System.Windows.Forms.Button();
             this.invertButton = new System.Windows.Forms.Button();
+            this.clipRectButton = new System.Windows.Forms.Button();
+            this.clipEllipseButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.srcImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.resImage)).BeginInit();
             this.SuspendLayout();
@@ -124,11 +126,35 @@ namespace VisibleTest
             this.invertButton.UseVisualStyleBackColor = true;
             this.invertButton.Click += new System.EventHandler(this.InvertButtonClick);
             // 
+            // clipRectButton
+            // 
+            this.clipRectButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.clipRectButton.Location = new System.Drawing.Point(292, 232);
+            this.clipRectButton.Name = "clipRectButton";
+            this.clipRectButton.Size = new System.Drawing.Size(90, 38);
+            this.clipRectButton.TabIndex = 8;
+            this.clipRectButton.Text = "ClipRect";
+            this.clipRectButton.UseVisualStyleBackColor = true;
+            this.clipRectButton.Click += new System.EventHandler(this.ClipRectButtonClick);
+            // 
+            // clipEllipseButton
+            // 
+            this.clipEllipseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.clipEllipseButton.Location = new System.Drawing.Point(292, 276);
+            this.clipEllipseButton.Name = "clipEllipseButton";
+            this.clipEllipseButton.Size = new System.Drawing.Size(90, 38);
+            this.clipEllipseButton.TabIndex = 9;
+            this.clipEllipseButton.Text = "ClipEllipse";
+            this.clipEllipseButton.UseVisualStyleBackColor = true;
+            this.clipEllipseButton.Click += new System.EventHandler(this.ClipEllipseButtonClick);
+            // 
             // ImageProcessTestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(673, 364);
+            this.Controls.Add(this.clipEllipseButton);
+            this.Controls.Add(this.clipRectButton);
             this.Controls.Add(this.invertButton);
             this.Controls.Add(this.grayButton);
             this.Controls.Add(this.swapArgbButton);
@@ -142,6 +168,8 @@ namespace VisibleTest
             ((System.ComponentModel.ISupportInitialize)(this.resImage)).EndInit();
             this.ResumeLayout(false);
         }
+        private System.Windows.Forms.Button clipEllipseButton;
+        private System.Windows.Forms.Button clipRectButton;
         private System.Windows.Forms.Button invertButton;
         private System.Windows.Forms.Button grayButton;
         private System.Windows.Forms.Button swapArgbButton;

@@ -6,6 +6,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 
@@ -43,7 +44,7 @@ namespace Rgbit.DotNet.DrawUtils
             if (!CheckImageFormat(bitmap, ImageFormat.Bmp, ImageFormat.Jpeg, ImageFormat.Png)) {
                 throw new ArgumentException("Unsuported format, only support for bmp, jpg or png");
             }
-            
+            image.GetThumbnailImage();image.RotateFlip
             // Locks the bitmap into system memory.
             Rectangle rect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
             BitmapData bmpdata = bitmap.LockBits(rect, ImageLockMode.ReadWrite, bitmap.PixelFormat);
@@ -198,6 +199,59 @@ namespace Rgbit.DotNet.DrawUtils
             bitmap.UnlockBits(bmpdata);
             
             return bitmap.Clone() as Image;
+        }
+        
+        /// <summary>
+        /// Intercept the rectangular portion of the image.
+        /// </summary>
+        /// <param name="image">Image object.</param>
+        /// <param name="x">The x-coordinate of the upper-left corner of the rectangle.</param>
+        /// <param name="y">The y-coordinate of the upper-left corner of the rectangle.</param>
+        /// <param name="width">The width of the rectangle.</param>
+        /// <param name="height">The height of the rectangle.</param>
+        /// <returns>Truncated image object.</returns>
+        public static Image ClipRectangle(Image image, int x, int y, int width, int height) {
+            Bitmap bitmap = image.Clone() as Bitmap;
+            
+            Rectangle rect = new Rectangle(x, y, width, height);
+            
+            return bitmap.Clone(rect, bitmap.PixelFormat) as Image;
+        }
+        
+        /// <summary>
+        /// Intercept the elliptical portion of the image.
+        /// </summary>
+        /// <param name="image">Image object.</param>
+        /// <param name="x">
+        /// The x coordinate of the upper left corner of the rectangle where the ellipse is located.
+        /// </param>
+        /// <param name="y">
+        /// The y coordinate of the upper left corner of the rectangle where the ellipse is located.
+        /// </param>
+        /// <param name="width">
+        /// The width of the rectangle where the ellipse is located.
+        /// </param>
+        /// <param name="height">
+        /// The height of the rectangle where the ellipse is located
+        /// </param>
+        /// <param name="backgroundColor">The color used to fill the blanks.</param>
+        /// <returns>Truncated image object.</returns>
+        public static Image ClipEllipse(Image image, int x, int y, int width, int height,
+                                        Color backgroundColor) {
+            // Get the corresponding rectangular area
+            Image rectImage = ClipRectangle(image, x, y, width, height);
+            Bitmap bitmap = rectImage.Clone() as Bitmap;
+            
+            Graphics g = Graphics.FromImage(bitmap);
+            g.Clear(backgroundColor);
+            
+            GraphicsPath path = new GraphicsPath();
+            path.AddEllipse(0, 0, width, height);
+            
+            g.SetClip(path);
+            g.DrawImage(rectImage, 0, 0);
+            
+            return bitmap as Image;
         }
     }
 }

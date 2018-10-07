@@ -46,5 +46,15 @@ namespace VisibleTest
         {
             resImage.Image = ImageProcess.Invert(srcImage.Image);
         }
+        
+        void ClipRectButtonClick(object sender, EventArgs e)
+        {
+            resImage.Image = ImageProcess.ClipRectangle(srcImage.Image, 40, 40, 400, 400);
+        }
+        
+        void ClipEllipseButtonClick(object sender, EventArgs e)
+        {
+            resImage.Image = ImageProcess.ClipEllipse(srcImage.Image, 40, 40, 400, 400, SystemColors.Control);
+        }
     }
 }
