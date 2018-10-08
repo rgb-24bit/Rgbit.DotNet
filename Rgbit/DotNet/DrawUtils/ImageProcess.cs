@@ -250,7 +250,7 @@ namespace Rgbit.DotNet.DrawUtils
         }
         
         /// <summary>
-        /// Rotates the Image. Performance is not very good.
+        /// Rotates the Image. Poor performance.
         /// 
         /// Refrence:
         /// https://stackoverflow.com/questions/2163829/how-do-i-rotate-a-picture-in-winforms
