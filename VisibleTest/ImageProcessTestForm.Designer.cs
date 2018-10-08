@@ -33,6 +33,7 @@ namespace VisibleTest
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.SelectFileButton = new System.Windows.Forms.Button();
             this.srcImage = new System.Windows.Forms.PictureBox();
@@ -44,6 +45,7 @@ namespace VisibleTest
             this.clipRectButton = new System.Windows.Forms.Button();
             this.clipEllipseButton = new System.Windows.Forms.Button();
             this.rotateButton = new System.Windows.Forms.Button();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.srcImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.resImage)).BeginInit();
             this.SuspendLayout();
@@ -160,6 +162,11 @@ namespace VisibleTest
             this.rotateButton.UseVisualStyleBackColor = true;
             this.rotateButton.Click += new System.EventHandler(this.RotateButtonClick);
             // 
+            // timer
+            // 
+            this.timer.Interval = 1000;
+            this.timer.Tick += new System.EventHandler(this.TimerTick);
+            // 
             // ImageProcessTestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -181,6 +188,7 @@ namespace VisibleTest
             ((System.ComponentModel.ISupportInitialize)(this.resImage)).EndInit();
             this.ResumeLayout(false);
         }
+        private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.Button rotateButton;
         private System.Windows.Forms.Button clipEllipseButton;
         private System.Windows.Forms.Button clipRectButton;

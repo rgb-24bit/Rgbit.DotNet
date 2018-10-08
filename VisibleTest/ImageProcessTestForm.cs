@@ -16,6 +16,8 @@ namespace VisibleTest
     /// </summary>
     public partial class ImageProcessTestForm : Form
     {
+        private int degree = 0;
+        
         public ImageProcessTestForm()
         {
             InitializeComponent();
@@ -60,7 +62,12 @@ namespace VisibleTest
         
         void RotateButtonClick(object sender, EventArgs e)
         {
-            resImage.Image = ImageProcess.RotateFlip(srcImage.Image, 90, true, false);
+            timer.Enabled = !timer.Enabled;
+        }
+        
+        void TimerTick(object sender, EventArgs e)
+        {
+            resImage.Image = ImageProcess.Rotate(srcImage.Image, degree++);
         }
     }
 }

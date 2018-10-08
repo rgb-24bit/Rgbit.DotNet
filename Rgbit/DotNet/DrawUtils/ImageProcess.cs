@@ -214,19 +214,28 @@ namespace Rgbit.DotNet.DrawUtils
         }
         
         /// <summary>
-        /// Rotates, flips, or rotates and flips the Image.
+        /// Rotates the Image.
+        /// </summary>
+        /// <param name="image">Image object.</param>
+        /// <param name="degree">The degree of rotation.</param>
+        /// <returns>Rotated Image object.</returns>
+        public static Image Rotate(Image image, int degree) {
+            // The performance of the RotateMultiple90 is better
+            if (degree % 90 == 0) {
+                return RotateMultiple90(image, degree);
+            } else {
+                return RotateTransform(image, degree);
+            }
+        }
+        
+        /// <summary>
+        /// Rotates the Image.
         /// </summary>
         /// <param name="image">Image object.</param>
         /// <param name="degree">The degree of rotation should be a multiple of 90.</param>
-        /// <param name="flipX">Whether to flip horizontally.</param>
-        /// <param name="flipY">Whether to flip vertically.</param>
-        /// <returns>Image object obtained after processing.</returns>
-        public static Image RotateFlip(Image image, int degree, bool flipX, bool flipY) {
+        /// <returns>Rotated Image object.</returns>
+        private static Image RotateMultiple90(Image image, int degree) {
             Image newImage = image.Clone() as Image;
-            
-            if (degree % 90 != 0) {
-                throw new ArgumentException("The degree of rotation should be a multiple of 90");
-            }
             
             Dictionary<int, RotateFlipType> degreeMap = new Dictionary<int, RotateFlipType>() {
                 {0, RotateFlipType.RotateNoneFlipNone},
@@ -236,6 +245,50 @@ namespace Rgbit.DotNet.DrawUtils
             };
             
             newImage.RotateFlip(degreeMap[degree % 360]);
+            
+            return newImage;
+        }
+        
+        /// <summary>
+        /// Rotates the Image. Performance is not very good.
+        /// 
+        /// Refrence:
+        /// https://stackoverflow.com/questions/2163829/how-do-i-rotate-a-picture-in-winforms
+        /// </summary>
+        /// <param name="image">Image object.</param>
+        /// <param name="degree">The degree of rotation.</param>
+        /// <returns>Rotated Image object.</returns>
+        private static Image RotateTransform(Image image, int degree) {
+            Bitmap bitmap = new Bitmap(image.Width, image.Height);
+            
+            bitmap.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+            
+            Graphics g = Graphics.FromImage(bitmap);
+            
+            // set the rotation point to the center of image
+            g.TranslateTransform(bitmap.Width / 2f, bitmap.Height / 2f);
+            
+            g.RotateTransform(degree % 360);
+            
+            // move the image back
+            g.TranslateTransform(-bitmap.Width / 2f, -bitmap.Height / 2f);
+            
+            g.DrawImage(image, new Point(0, 0));
+            
+            g.Dispose();
+
+            return bitmap as Image;
+        }
+        
+        /// <summary>
+        /// Flip the image.
+        /// </summary>
+        /// <param name="image">Image object.</param>
+        /// <param name="flipX">Whether to flip horizontally.</param>
+        /// <param name="flipY">Whether to flip vertically.</param>
+        /// <returns>Flip image object.</returns>
+        public static Image Flip(Image image, bool flipX, bool flipY) {
+            Image newImage = image.Clone() as Image;
             
             if (flipX == true) {
                 newImage.RotateFlip(RotateFlipType.RotateNoneFlipX);
