@@ -96,7 +96,6 @@ namespace Rgbit.DotNet.DrawUtils
         /// </summary>
         /// <returns>Current factory instance itself.</returns>
         public ImageProcessFactory Scale(float widthScale, float heightScale) {
-
             this.image = ImageProcess.Scale(this.image, widthScale, heightScale);
             return this;
         }
