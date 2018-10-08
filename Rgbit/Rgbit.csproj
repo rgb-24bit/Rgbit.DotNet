@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DotNet\DrawUtils\ImageProcess.cs" />
+    <Compile Include="DotNet\DrawUtils\ImageProcessFactory.cs" />
     <Compile Include="DotNet\MediaUtils\MCIBasic.cs" />
     <Compile Include="DotNet\MediaUtils\MCIPlayer.cs" />
     <Compile Include="DotNet\MediaUtils\MCIRecorder.cs" />
