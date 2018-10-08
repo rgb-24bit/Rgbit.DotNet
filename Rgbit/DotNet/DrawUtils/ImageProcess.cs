@@ -263,20 +263,18 @@ namespace Rgbit.DotNet.DrawUtils
             
             bitmap.SetResolution(image.HorizontalResolution, image.VerticalResolution);
             
-            Graphics g = Graphics.FromImage(bitmap);
+            using (Graphics g = Graphics.FromImage(bitmap)) {
+                // set the rotation point to the center of image
+                g.TranslateTransform(bitmap.Width / 2f, bitmap.Height / 2f);
+                
+                g.RotateTransform(degree % 360);
+                
+                // move the image back
+                g.TranslateTransform(-bitmap.Width / 2f, -bitmap.Height / 2f);
+                
+                g.DrawImage(image, new Point(0, 0));
+            }
             
-            // set the rotation point to the center of image
-            g.TranslateTransform(bitmap.Width / 2f, bitmap.Height / 2f);
-            
-            g.RotateTransform(degree % 360);
-            
-            // move the image back
-            g.TranslateTransform(-bitmap.Width / 2f, -bitmap.Height / 2f);
-            
-            g.DrawImage(image, new Point(0, 0));
-            
-            g.Dispose();
-
             return bitmap as Image;
         }
         
@@ -342,15 +340,16 @@ namespace Rgbit.DotNet.DrawUtils
             Image rectImage = ClipRectangle(image, x, y, width, height);
             Bitmap bitmap = rectImage.Clone() as Bitmap;
             
-            Graphics g = Graphics.FromImage(bitmap);
-            g.Clear(backgroundColor);
-            
-            GraphicsPath path = new GraphicsPath();
-            path.AddEllipse(0, 0, width, height);
-            
-            g.SetClip(path);
-            g.DrawImage(rectImage, 0, 0);
-            
+            using (Graphics g = Graphics.FromImage(bitmap)) {
+                g.Clear(backgroundColor);
+                
+                GraphicsPath path = new GraphicsPath();
+                path.AddEllipse(0, 0, width, height);
+                
+                g.SetClip(path);
+                g.DrawImage(rectImage, 0, 0);
+            }
+
             return bitmap as Image;
         }
     }
