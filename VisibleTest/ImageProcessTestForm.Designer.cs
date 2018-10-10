@@ -39,7 +39,6 @@ namespace VisibleTest
             this.srcImage = new System.Windows.Forms.PictureBox();
             this.resImage = new System.Windows.Forms.PictureBox();
             this.swapRgbButton = new System.Windows.Forms.Button();
-            this.swapArgbButton = new System.Windows.Forms.Button();
             this.grayButton = new System.Windows.Forms.Button();
             this.invertButton = new System.Windows.Forms.Button();
             this.clipRectButton = new System.Windows.Forms.Button();
@@ -96,21 +95,10 @@ namespace VisibleTest
             this.swapRgbButton.UseVisualStyleBackColor = true;
             this.swapRgbButton.Click += new System.EventHandler(this.SwapRgbButtonClick);
             // 
-            // swapArgbButton
-            // 
-            this.swapArgbButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.swapArgbButton.Location = new System.Drawing.Point(292, 100);
-            this.swapArgbButton.Name = "swapArgbButton";
-            this.swapArgbButton.Size = new System.Drawing.Size(90, 38);
-            this.swapArgbButton.TabIndex = 5;
-            this.swapArgbButton.Text = "Swap Argb";
-            this.swapArgbButton.UseVisualStyleBackColor = true;
-            this.swapArgbButton.Click += new System.EventHandler(this.SwapArgbButtonClick);
-            // 
             // grayButton
             // 
             this.grayButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.grayButton.Location = new System.Drawing.Point(292, 144);
+            this.grayButton.Location = new System.Drawing.Point(292, 100);
             this.grayButton.Name = "grayButton";
             this.grayButton.Size = new System.Drawing.Size(90, 38);
             this.grayButton.TabIndex = 6;
@@ -121,7 +109,7 @@ namespace VisibleTest
             // invertButton
             // 
             this.invertButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.invertButton.Location = new System.Drawing.Point(292, 188);
+            this.invertButton.Location = new System.Drawing.Point(292, 144);
             this.invertButton.Name = "invertButton";
             this.invertButton.Size = new System.Drawing.Size(90, 38);
             this.invertButton.TabIndex = 7;
@@ -132,7 +120,7 @@ namespace VisibleTest
             // clipRectButton
             // 
             this.clipRectButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.clipRectButton.Location = new System.Drawing.Point(292, 232);
+            this.clipRectButton.Location = new System.Drawing.Point(292, 188);
             this.clipRectButton.Name = "clipRectButton";
             this.clipRectButton.Size = new System.Drawing.Size(90, 38);
             this.clipRectButton.TabIndex = 8;
@@ -143,7 +131,7 @@ namespace VisibleTest
             // clipEllipseButton
             // 
             this.clipEllipseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.clipEllipseButton.Location = new System.Drawing.Point(292, 276);
+            this.clipEllipseButton.Location = new System.Drawing.Point(292, 232);
             this.clipEllipseButton.Name = "clipEllipseButton";
             this.clipEllipseButton.Size = new System.Drawing.Size(90, 38);
             this.clipEllipseButton.TabIndex = 9;
@@ -154,7 +142,7 @@ namespace VisibleTest
             // rotateButton
             // 
             this.rotateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rotateButton.Location = new System.Drawing.Point(292, 320);
+            this.rotateButton.Location = new System.Drawing.Point(292, 276);
             this.rotateButton.Name = "rotateButton";
             this.rotateButton.Size = new System.Drawing.Size(90, 38);
             this.rotateButton.TabIndex = 10;
@@ -177,7 +165,6 @@ namespace VisibleTest
             this.Controls.Add(this.clipRectButton);
             this.Controls.Add(this.invertButton);
             this.Controls.Add(this.grayButton);
-            this.Controls.Add(this.swapArgbButton);
             this.Controls.Add(this.swapRgbButton);
             this.Controls.Add(this.resImage);
             this.Controls.Add(this.srcImage);
@@ -194,7 +181,6 @@ namespace VisibleTest
         private System.Windows.Forms.Button clipRectButton;
         private System.Windows.Forms.Button invertButton;
         private System.Windows.Forms.Button grayButton;
-        private System.Windows.Forms.Button swapArgbButton;
         private System.Windows.Forms.Button swapRgbButton;
         private System.Windows.Forms.PictureBox resImage;
         private System.Windows.Forms.PictureBox srcImage;

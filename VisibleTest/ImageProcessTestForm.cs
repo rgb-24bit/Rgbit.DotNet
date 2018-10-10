@@ -33,12 +33,7 @@ namespace VisibleTest
         {
             resImage.Image = ImageProcess.SwapRgb(srcImage.Image, "gbr");
         }
-        
-        void SwapArgbButtonClick(object sender, EventArgs e)
-        {
-            resImage.Image = ImageProcess.SwapArgb(srcImage.Image, "gbar");
-        }
-        
+
         void GrayButtonClick(object sender, EventArgs e)
         {
             resImage.Image = ImageProcess.Gray(srcImage.Image);

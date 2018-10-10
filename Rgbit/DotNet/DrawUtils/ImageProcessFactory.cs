@@ -63,16 +63,7 @@ namespace Rgbit.DotNet.DrawUtils
             this.image = ImageProcess.SwapRgb(this.image, rgbOrder);
             return this;
         }
-        
-        /// <summary>
-        /// Swap image argb color channel.
-        /// </summary>
-        /// <returns>Current factory instance itself.</returns>
-        public ImageProcessFactory SwapArgb(String argbOrder) {
-            this.image = ImageProcess.SwapArgb(this.image, argbOrder);
-            return this;
-        }
-        
+  
         /// <summary>
         /// Get the grayscale image corresponding to the image.
         /// </summary>
