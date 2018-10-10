@@ -33,7 +33,6 @@ namespace VisibleTest
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.SelectFileButton = new System.Windows.Forms.Button();
             this.srcImage = new System.Windows.Forms.PictureBox();
@@ -44,7 +43,11 @@ namespace VisibleTest
             this.clipRectButton = new System.Windows.Forms.Button();
             this.clipEllipseButton = new System.Windows.Forms.Button();
             this.rotateButton = new System.Windows.Forms.Button();
-            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.atomButton = new System.Windows.Forms.Button();
+            this.mosaicButton = new System.Windows.Forms.Button();
+            this.embossButton = new System.Windows.Forms.Button();
+            this.softenButton = new System.Windows.Forms.Button();
+            this.sharpenButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.srcImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.resImage)).BeginInit();
             this.SuspendLayout();
@@ -150,16 +153,71 @@ namespace VisibleTest
             this.rotateButton.UseVisualStyleBackColor = true;
             this.rotateButton.Click += new System.EventHandler(this.RotateButtonClick);
             // 
-            // timer
+            // atomButton
             // 
-            this.timer.Interval = 1000;
-            this.timer.Tick += new System.EventHandler(this.TimerTick);
+            this.atomButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.atomButton.Location = new System.Drawing.Point(12, 358);
+            this.atomButton.Name = "atomButton";
+            this.atomButton.Size = new System.Drawing.Size(90, 38);
+            this.atomButton.TabIndex = 11;
+            this.atomButton.Text = "Atomization";
+            this.atomButton.UseVisualStyleBackColor = true;
+            this.atomButton.Click += new System.EventHandler(this.AtomButtonClick);
+            // 
+            // mosaicButton
+            // 
+            this.mosaicButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.mosaicButton.Location = new System.Drawing.Point(108, 358);
+            this.mosaicButton.Name = "mosaicButton";
+            this.mosaicButton.Size = new System.Drawing.Size(90, 38);
+            this.mosaicButton.TabIndex = 12;
+            this.mosaicButton.Text = "Mosaic";
+            this.mosaicButton.UseVisualStyleBackColor = true;
+            this.mosaicButton.Click += new System.EventHandler(this.MosaicButtonClick);
+            // 
+            // embossButton
+            // 
+            this.embossButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.embossButton.Location = new System.Drawing.Point(204, 358);
+            this.embossButton.Name = "embossButton";
+            this.embossButton.Size = new System.Drawing.Size(90, 38);
+            this.embossButton.TabIndex = 13;
+            this.embossButton.Text = "Emboss";
+            this.embossButton.UseVisualStyleBackColor = true;
+            this.embossButton.Click += new System.EventHandler(this.EmbossButtonClick);
+            // 
+            // softenButton
+            // 
+            this.softenButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.softenButton.Location = new System.Drawing.Point(300, 358);
+            this.softenButton.Name = "softenButton";
+            this.softenButton.Size = new System.Drawing.Size(90, 38);
+            this.softenButton.TabIndex = 14;
+            this.softenButton.Text = "Soften";
+            this.softenButton.UseVisualStyleBackColor = true;
+            this.softenButton.Click += new System.EventHandler(this.SoftenButtonClick);
+            // 
+            // sharpenButton
+            // 
+            this.sharpenButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.sharpenButton.Location = new System.Drawing.Point(396, 358);
+            this.sharpenButton.Name = "sharpenButton";
+            this.sharpenButton.Size = new System.Drawing.Size(90, 38);
+            this.sharpenButton.TabIndex = 15;
+            this.sharpenButton.Text = "Sharpen";
+            this.sharpenButton.UseVisualStyleBackColor = true;
+            this.sharpenButton.Click += new System.EventHandler(this.SharpenButtonClick);
             // 
             // ImageProcessTestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(673, 364);
+            this.ClientSize = new System.Drawing.Size(673, 398);
+            this.Controls.Add(this.sharpenButton);
+            this.Controls.Add(this.softenButton);
+            this.Controls.Add(this.embossButton);
+            this.Controls.Add(this.mosaicButton);
+            this.Controls.Add(this.atomButton);
             this.Controls.Add(this.rotateButton);
             this.Controls.Add(this.clipEllipseButton);
             this.Controls.Add(this.clipRectButton);
@@ -175,7 +233,11 @@ namespace VisibleTest
             ((System.ComponentModel.ISupportInitialize)(this.resImage)).EndInit();
             this.ResumeLayout(false);
         }
-        private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.Button sharpenButton;
+        private System.Windows.Forms.Button softenButton;
+        private System.Windows.Forms.Button embossButton;
+        private System.Windows.Forms.Button mosaicButton;
+        private System.Windows.Forms.Button atomButton;
         private System.Windows.Forms.Button rotateButton;
         private System.Windows.Forms.Button clipEllipseButton;
         private System.Windows.Forms.Button clipRectButton;

@@ -57,12 +57,32 @@ namespace VisibleTest
         
         void RotateButtonClick(object sender, EventArgs e)
         {
-            timer.Enabled = !timer.Enabled;
+            resImage.Image = ImageProcess.Rotate(srcImage.Image, degree++);
+        }
+
+        void AtomButtonClick(object sender, EventArgs e)
+        {
+            resImage.Image = ImageProcess.Atomization(srcImage.Image);
         }
         
-        void TimerTick(object sender, EventArgs e)
+        void MosaicButtonClick(object sender, EventArgs e)
         {
-            resImage.Image = ImageProcess.Rotate(srcImage.Image, degree++);
+            resImage.Image = ImageProcess.Mosaic(srcImage.Image, 15);
+        }
+        
+        void SoftenButtonClick(object sender, EventArgs e)
+        {
+             resImage.Image = ImageFilter.SoftenFilter(srcImage.Image);
+        }
+        
+        void EmbossButtonClick(object sender, EventArgs e)
+        {
+            resImage.Image = ImageFilter.EmbossFilter(srcImage.Image);
+        }
+        
+        void SharpenButtonClick(object sender, EventArgs e)
+        {
+            resImage.Image = ImageFilter.SharpenFilter(srcImage.Image);
         }
     }
 }

@@ -4,11 +4,8 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using System.Runtime.InteropServices;
 
 namespace Rgbit.DotNet.DrawUtils
 {
@@ -17,6 +14,12 @@ namespace Rgbit.DotNet.DrawUtils
     /// </summary>
     public class ImageFilter
     {
+        /// <summary>
+        /// Picture filter.
+        /// </summary>
+        /// <param name="image">Image object.</param>
+        /// <param name="filter">3x3 filter.</param>
+        /// <returns>Processed image object.</returns>
         public static Image Filter(Image image, int[] filter) {
             Bitmap bitmap = image.Clone() as Bitmap;
 
@@ -24,7 +27,7 @@ namespace Rgbit.DotNet.DrawUtils
             Rectangle rect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
             BitmapData bmpdata = bitmap.LockBits(rect, ImageLockMode.ReadWrite, bitmap.PixelFormat);
             
-            int pixelSize = bitmap.RawFormat.Equals(ImageFormat.Png) ? 4 : 3;  // Unit pixel size
+            int pixelSize = ImageProcess.GetUnitPixelSize(bitmap);
             int pb = 0, pg = 1, pr = 2;  // BGR
             
             unsafe {
@@ -71,16 +74,25 @@ namespace Rgbit.DotNet.DrawUtils
             return bitmap as Image;
         }
         
+        /// <summary>
+        /// Embossed filter
+        /// </summary>
         public static Image EmbossFilter(Image image) {
             int[] filter = {1, 0, 0, 0, 0, 0, 0, 0, -1};
             return Filter(image, filter);
         }
         
+        /// <summary>
+        /// Softening filter
+        /// </summary>
         public static Image SoftenFilter(Image image) {
             int[] gauss = {1, 2, 1, 2, 4, 2, 1, 2, 1};
             return Filter(image, gauss);
         }
         
+        /// <summary>
+        /// Sharpening filter
+        /// </summary>
         public static Image SharpenFilter(Image image) {
             int[] laplacian = {-1, -1, -1, -1, 9, -1, -1, -1, -1};
             return Filter(image, laplacian);

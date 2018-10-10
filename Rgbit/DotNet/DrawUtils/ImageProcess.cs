@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using System.Runtime.InteropServices;
 
 namespace Rgbit.DotNet.DrawUtils
 {
@@ -21,7 +20,7 @@ namespace Rgbit.DotNet.DrawUtils
         /// Get the byte size of the unit pixel.
         /// </summary>
         /// <returns>Unit pixel size in bytes.</returns>
-        private static int GetUnitPixelSize(Bitmap bitmap) {
+        internal static int GetUnitPixelSize(Bitmap bitmap) {
             return Image.GetPixelFormatSize(bitmap.PixelFormat) / 8;
         }
         
@@ -128,6 +127,110 @@ namespace Rgbit.DotNet.DrawUtils
                     }
                     // Handling byte alignment issues
                     ptr += bmpdata.Stride - bmpdata.Width * pixelSize;
+                }
+            }
+
+            bitmap.UnlockBits(bmpdata);
+            
+            return bitmap as Image;
+        }
+        
+        /// <summary>
+        /// Atomization image.
+        /// </summary>
+        public static Image Atomization(Image image) {
+            Bitmap bitmap = image.Clone() as Bitmap;
+            
+            // Locks the bitmap into system memory.
+            Rectangle rect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
+            BitmapData bmpdata = bitmap.LockBits(rect, ImageLockMode.ReadWrite, bitmap.PixelFormat);
+            
+            int pixelSize = GetUnitPixelSize(bitmap);
+            int b = 0, g = 1, r = 2;  // BGR
+            
+            unsafe {
+                byte* start = (byte*) bmpdata.Scan0;
+                
+                // Calculate the offset
+                Func<int, int, int> offset = (x, y) => {
+                    return x * pixelSize + y * bmpdata.Stride;
+                };
+                
+                Random random = new Random();
+                
+                for (int x = 1; x < bitmap.Width - 1; ++x) {
+                    for (int y = 1; y < bitmap.Height - 1; ++y) {
+                        int k = random.Next(123456);
+                        
+                        int dx = Math.Min(bitmap.Width - 1, x + k % 19);
+                        int dy = Math.Min(bitmap.Height - 1, y + k % 19);
+                        
+                        byte* ptr = start + offset(dx, dy);
+                        byte* target = start + offset(x, y);
+                        
+                        target[r] = ptr[r];
+                        target[g] = ptr[g];
+                        target[b] = ptr[b];
+                    }
+                }
+            }
+
+            bitmap.UnlockBits(bmpdata);
+            
+            return bitmap as Image;
+        }
+        
+        public static Image Mosaic(Image image, int effectWidth) {
+            Bitmap bitmap = image.Clone() as Bitmap;
+            
+            // Locks the bitmap into system memory.
+            Rectangle rect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
+            BitmapData bmpdata = bitmap.LockBits(rect, ImageLockMode.ReadWrite, bitmap.PixelFormat);
+            
+            int pixelSize = GetUnitPixelSize(bitmap);
+            int b = 0, g = 1, r = 2;  // BGR
+            
+            unsafe {
+                byte* start = (byte*) bmpdata.Scan0;
+                
+                // Calculate the offset
+                Func<int, int, int> offset = (x, y) => {
+                    return x * pixelSize + y * bmpdata.Stride;
+                };
+
+                for (int h = 0; h < bitmap.Height; h += effectWidth) {
+                    for (int w =0; w < bitmap.Width; w += effectWidth) {
+                        int avgR = 0, avgG = 0, avgB = 0, blurPixelCount = 0;
+                        
+                        // Calculation range sum
+                        for (int x = w; (x < w + effectWidth && x < bitmap.Width); ++x) {
+                            for (int y = h; (y < h + effectWidth && y < bitmap.Height); ++y) {
+                                byte* ptr = start + offset(x, y);
+                                
+                                avgR += ptr[r];
+                                avgG += ptr[g];
+                                avgB += ptr[b];
+                                
+                                blurPixelCount++;
+                            }
+                        }
+                        
+                        // Calculated range average
+                        avgR = avgR / blurPixelCount;
+                        avgG = avgG / blurPixelCount;
+                        avgB = avgB / blurPixelCount;
+                        
+                        // Set this value in all ranges
+                        for (int x = w; (x < w + effectWidth && x < bitmap.Width); ++x) {
+                            for (int y = h; (y < h + effectWidth && y < bitmap.Height); ++y) {
+                                byte* ptr = start + offset(x, y);
+                                
+                                ptr[r] = (byte) avgR;
+                                ptr[g] = (byte) avgG;
+                                ptr[b] = (byte) avgB;
+                            }
+                        }
+                    }
                 }
             }
 
