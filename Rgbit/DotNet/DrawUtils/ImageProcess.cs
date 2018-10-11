@@ -20,7 +20,7 @@ namespace Rgbit.DotNet.DrawUtils
         /// Get the byte size of the unit pixel.
         /// </summary>
         /// <returns>Unit pixel size in bytes.</returns>
-        internal static int GetUnitPixelSize(Bitmap bitmap) {
+        public static int GetUnitPixelSize(Bitmap bitmap) {
             return Image.GetPixelFormatSize(bitmap.PixelFormat) / 8;
         }
         
