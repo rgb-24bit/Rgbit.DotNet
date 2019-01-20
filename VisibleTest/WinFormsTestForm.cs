@@ -1,5 +1,5 @@
 ﻿/**
- * Copyright (c) 2018 by rgb-24bit.
+ * Copyright (c) 2018 - 2019 by rgb-24bit.
  * License MIT, see LICENSE for more details.
  */
 

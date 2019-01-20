@@ -1,5 +1,5 @@
 ﻿/**
- * Copyright (c) 2018 by rgb-24bit.
+ * Copyright (c) 2018 - 2019 by rgb-24bit.
  * License MIT, see LICENSE for more details.
  */
 
@@ -14,11 +14,11 @@ namespace Rgbit.DotNet.DrawUtils
     /// 
     /// <example>
     /// <code>
-    /// Image result = ImageProcessFactory.newFactory(image)
+    /// Image result = ImageProcessFactory.NewFactory(image)
     ///     .Invert()
     ///     .Gray()
     ///     .SwapRgb("gbr")
-    ///     .getResult();
+    ///     .GetResult();
     /// </code>
     /// </example>
     /// 
@@ -40,7 +40,7 @@ namespace Rgbit.DotNet.DrawUtils
         /// </summary>
         /// <param name="image">The image object to be processed by this factory, not null.</param>
         /// <returns>ImageProcessFactory instance.</returns>
-        public static ImageProcessFactory newFactory(Image image) {
+        public static ImageProcessFactory NewFactory(Image image) {
             if (image == null) {
                 throw new ArgumentNullException("image", "Image cannot be empty !");
             }
@@ -51,7 +51,7 @@ namespace Rgbit.DotNet.DrawUtils
         /// Return processing result.
         /// </summary>
         /// <returns>Processed image object.</returns>
-        public Image getResult() {
+        public Image GetResult() {
             return this.image;
         }
         
