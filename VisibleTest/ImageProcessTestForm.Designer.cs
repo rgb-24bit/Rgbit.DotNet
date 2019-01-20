@@ -48,6 +48,7 @@ namespace VisibleTest
             this.embossButton = new System.Windows.Forms.Button();
             this.softenButton = new System.Windows.Forms.Button();
             this.sharpenButton = new System.Windows.Forms.Button();
+            this.closetoButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.srcImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.resImage)).BeginInit();
             this.SuspendLayout();
@@ -208,11 +209,23 @@ namespace VisibleTest
             this.sharpenButton.UseVisualStyleBackColor = true;
             this.sharpenButton.Click += new System.EventHandler(this.SharpenButtonClick);
             // 
+            // closetoButton
+            // 
+            this.closetoButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.closetoButton.Location = new System.Drawing.Point(492, 358);
+            this.closetoButton.Name = "closetoButton";
+            this.closetoButton.Size = new System.Drawing.Size(90, 38);
+            this.closetoButton.TabIndex = 16;
+            this.closetoButton.Text = "CloseTo";
+            this.closetoButton.UseVisualStyleBackColor = true;
+            this.closetoButton.Click += new System.EventHandler(this.ClosetoButtonClick);
+            // 
             // ImageProcessTestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(673, 398);
+            this.Controls.Add(this.closetoButton);
             this.Controls.Add(this.sharpenButton);
             this.Controls.Add(this.softenButton);
             this.Controls.Add(this.embossButton);
@@ -228,11 +241,13 @@ namespace VisibleTest
             this.Controls.Add(this.srcImage);
             this.Controls.Add(this.SelectFileButton);
             this.Name = "ImageProcessTestForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ImageProcessTest";
             ((System.ComponentModel.ISupportInitialize)(this.srcImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.resImage)).EndInit();
             this.ResumeLayout(false);
         }
+        private System.Windows.Forms.Button closetoButton;
         private System.Windows.Forms.Button sharpenButton;
         private System.Windows.Forms.Button softenButton;
         private System.Windows.Forms.Button embossButton;

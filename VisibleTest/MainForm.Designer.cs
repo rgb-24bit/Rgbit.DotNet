@@ -80,6 +80,7 @@ namespace VisibleTest
             this.Controls.Add(this.winformsTestButton);
             this.Controls.Add(this.mediaTestButton);
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "VisibleTest";
             this.ResumeLayout(false);
         }

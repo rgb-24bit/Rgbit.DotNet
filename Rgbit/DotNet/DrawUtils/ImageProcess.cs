@@ -268,6 +268,33 @@ namespace Rgbit.DotNet.DrawUtils
         }
         
         /// <summary>
+        /// Make the source image close to the target image
+        /// </summary>
+        /// <param name="source">Source image</param>
+        /// <param name="target">Taregt image</param>
+        /// <param name="rate">
+        /// Control the probability value of the approach speed, the closer the closer,
+        /// the faster
+        /// </param>
+        /// <returns>Processed image object</returns>
+        public static Image CloseTo(Image source, Image target, double rate) {
+            Bitmap sourceBitmap = source.Clone() as Bitmap;
+            Bitmap targetBitmap = target.Clone() as Bitmap;
+            
+            Random random = new Random();
+            
+            for (int x = 0; x < source.Width; ++x) {
+                for (int y = 0; y < source.Height; ++y) {
+                    if (random.NextDouble() < rate) {
+                        sourceBitmap.SetPixel(x, y, targetBitmap.GetPixel(x, y));
+                    }
+                }
+            }
+            
+            return sourceBitmap as Image;
+        }
+        
+        /// <summary>
         /// Rotates the Image.
         /// </summary>
         /// <param name="image">Image object.</param>

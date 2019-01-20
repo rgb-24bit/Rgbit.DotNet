@@ -84,5 +84,10 @@ namespace VisibleTest
         {
             resImage.Image = ImageFilter.SharpenFilter(srcImage.Image);
         }
+        
+        void ClosetoButtonClick(object sender, EventArgs e)
+        {
+            resImage.Image = ImageProcess.CloseTo(resImage.Image, srcImage.Image, 0.1);
+        }
     }
 }
